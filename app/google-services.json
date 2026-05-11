@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "27372785873",
+    "project_id": "shoemartshop",
+    "storage_bucket": "shoemartshop.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:27372785873:android:ef7173c96079560e6ff5f0",
+        "android_client_info": {
+          "package_name": "com.example.shoemartshop"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBg_inYty-vsxMzvpV3eC7neZr-6G0fDpg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
