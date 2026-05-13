@@ -6,7 +6,6 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.example.shoemartshop.MainActivity
 import com.example.shoemartshop.databinding.ActivitySplashBinding
 
 class SplashActivity : AppCompatActivity() {
@@ -26,7 +25,7 @@ class SplashActivity : AppCompatActivity() {
         }
 
         binding.startBtn.setOnClickListener {
-            startActivity(Intent(this@SplashActivity, MainActivity::class.java))
+            startActivity(Intent(this@SplashActivity, DashboardActivity::class.java))
         }
     }
 }
