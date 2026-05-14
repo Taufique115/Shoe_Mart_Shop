@@ -270,21 +270,43 @@
                 app:srcCompat="@drawable/btn_2" />
         </LinearLayout>
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/favBtn"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical">
+            android:layout_weight="1">
 
             <ImageView
                 android:id="@+id/imageViewFavIcon"
                 android:layout_width="28dp"
                 android:layout_height="28dp"
                 android:contentDescription="@null"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/btn_3" />
-        </LinearLayout>
+
+            <TextView
+                android:id="@+id/txtFavBadge"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_marginStart="14dp"
+                android:layout_marginBottom="14dp"
+                android:background="@drawable/circle_white_bg"
+                android:backgroundTint="@color/red"
+                android:gravity="center"
+                android:text="0"
+                android:textColor="@color/white"
+                android:textSize="10sp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@+id/imageViewFavIcon"
+                app:layout_constraintStart_toStartOf="@+id/imageViewFavIcon"
+                app:layout_constraintTop_toTopOf="@+id/imageViewFavIcon"
+                app:layout_constraintEnd_toEndOf="@+id/imageViewFavIcon"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintVertical_bias="0.0" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <LinearLayout
             android:id="@+id/profileBtn"
