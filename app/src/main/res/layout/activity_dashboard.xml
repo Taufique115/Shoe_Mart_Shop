@@ -30,16 +30,6 @@
                 android:layout_marginEnd="24dp">
 
                 <TextView
-                    android:id="@+id/textViewWelcome"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/welcome_back"
-                    android:textColor="@color/grey"
-                    android:textSize="14sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
                     android:id="@+id/textViewWelcomeBold"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -48,19 +38,8 @@
                     android:textSize="20sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textViewWelcome" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
-                <ImageView
-                    android:id="@+id/imageViewBell"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:background="@drawable/circle_white_bg"
-                    android:contentDescription="@null"
-                    android:padding="8dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/bell_icon" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <!-- Search Section -->
@@ -96,6 +75,7 @@
                     android:imeOptions="actionSearch"
                     android:inputType="text"
                     android:textColor="@color/black"
+                    android:textColorHint="@color/black"
                     android:textSize="14sp" />
             </LinearLayout>
 
@@ -175,20 +155,12 @@
 
                 <TextView
                     android:id="@+id/textViewRecommendationLabel"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:text="@string/recommendation"
                     android:textColor="@color/black"
                     android:textSize="18sp"
                     android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/textViewSeeAll"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/see_all"
-                    android:textColor="@color/blue" />
             </LinearLayout>
 
             <!-- Recommendation Content -->
@@ -227,13 +199,14 @@
     <LinearLayout
         android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="16dp"
-        android:background="@drawable/blue_bg"
+        android:layout_height="54dp"
+        android:layout_marginStart="56dp"
+        android:layout_marginEnd="56dp"
+        android:layout_marginBottom="12dp"
+        android:background="@drawable/blue_bg_transparent"
         android:baselineAligned="false"
         android:orientation="horizontal"
+        android:elevation="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -248,27 +221,49 @@
 
             <ImageView
                 android:id="@+id/imageViewHomeIcon"
-                android:layout_width="28dp"
-                android:layout_height="28dp"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
                 android:contentDescription="@null"
                 app:srcCompat="@drawable/btn_1" />
         </LinearLayout>
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cartBtn"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical">
+            android:layout_weight="1">
 
             <ImageView
                 android:id="@+id/imageViewCartIcon"
-                android:layout_width="28dp"
-                android:layout_height="28dp"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
                 android:contentDescription="@null"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/btn_2" />
-        </LinearLayout>
+
+            <TextView
+                android:id="@+id/txtCartBadge"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_marginStart="14dp"
+                android:layout_marginBottom="14dp"
+                android:background="@drawable/circle_white_bg"
+                android:backgroundTint="@color/red"
+                android:gravity="center"
+                android:text="0"
+                android:textColor="@color/white"
+                android:textSize="10sp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@+id/imageViewCartIcon"
+                app:layout_constraintStart_toStartOf="@+id/imageViewCartIcon"
+                app:layout_constraintTop_toTopOf="@+id/imageViewCartIcon"
+                app:layout_constraintEnd_toEndOf="@+id/imageViewCartIcon"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintVertical_bias="0.0" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/favBtn"
@@ -278,8 +273,8 @@
 
             <ImageView
                 android:id="@+id/imageViewFavIcon"
-                android:layout_width="28dp"
-                android:layout_height="28dp"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
                 android:contentDescription="@null"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -318,8 +313,8 @@
 
             <ImageView
                 android:id="@+id/imageViewProfileIcon"
-                android:layout_width="28dp"
-                android:layout_height="28dp"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
                 android:contentDescription="@null"
                 app:srcCompat="@drawable/btn_5" />
         </LinearLayout>
