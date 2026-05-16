@@ -8,47 +8,21 @@
     tools:context=".Activity.CheckoutActivity">
 
     <!-- Top Bar -->
-    <ImageView
-        android:id="@+id/btnBack"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="48dp"
-        android:background="@drawable/back_button_bg"
-        android:contentDescription="Back"
-        android:padding="10dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/back"
-        app:tint="#1A1A2E" />
 
     <TextView
         android:id="@+id/txtCheckoutTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
         android:fontFamily="sans-serif-medium"
         android:text="Check out"
         android:textColor="#1A1A2E"
         android:textSize="22sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/btnBack"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/btnBack" />
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/btnBag"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="48dp"
-        android:layout_marginEnd="20dp"
-        android:background="@drawable/back_button_bg"
-        android:contentDescription="Bag"
-        android:padding="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_launcher_foreground"
-        app:tint="#1A1A2E" />
 
     <!-- Cart Items RecyclerView -->
     <androidx.recyclerview.widget.RecyclerView
@@ -59,7 +33,7 @@
         android:clipToPadding="false"
         android:paddingBottom="16dp"
         app:layout_constraintBottom_toTopOf="@+id/bottomSection"
-        app:layout_constraintTop_toBottomOf="@+id/btnBack" />
+        app:layout_constraintTop_toBottomOf="@+id/txtCheckoutTitle" />
 
     <!-- Empty Cart Text -->
     <TextView
@@ -176,7 +150,7 @@
             tools:text="৳12,244.50" />
 
         <!-- Proceed Button -->
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnProceed"
             android:layout_width="match_parent"
             android:layout_height="56dp"

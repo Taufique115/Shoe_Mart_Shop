@@ -56,9 +56,6 @@ class PaymentActivity : AppCompatActivity() {
     }
 
     private fun setupListeners() {
-        binding.btnBack.setOnClickListener {
-            finish()
-        }
 
         binding.btnMethodCard.setOnClickListener {
             selectCardMethod()
@@ -133,7 +130,7 @@ class PaymentActivity : AppCompatActivity() {
         
         // Update Card UI
         binding.btnMethodCard.setBackgroundResource(R.drawable.payment_method_selected_bg)
-        binding.imgCardSelected.setImageResource(R.drawable.checked_icon_black)
+        binding.imgCardSelected.setImageResource(R.drawable.checked_icon_pink)
         
         // Update bKash UI
         binding.btnMethodBkash.setBackgroundResource(R.drawable.payment_method_unselected_bg)

@@ -60,27 +60,27 @@ class MainRepository {
     fun loadBanners() {
         val list = mutableListOf<SliderModel>()
 
-        // Banner 1 - Cloudinary
+        // Banner 1 - Cloudinary (B22)
         list.add(
             SliderModel(
-                url = "https://res.cloudinary.com/dxafieanc/image/upload/v1778446652/banner1_xzalup.png",
-                title = "Step Into Style",
-                subTitle = "Grab your perfect pair today",
-                buttonText = "Shop Now",
-                backgroundColor = "#1B2236",
+                url = "https://res.cloudinary.com/dxafieanc/image/upload/v1778949405/B22_eqdrqp.jpg",
+                title = "",
+                subTitle = "",
+                buttonText = "",
+                backgroundColor = "#00000000",
                 textColor = "#FFFFFF",
                 isImageLeft = true
             )
         )
 
-        // Banner 2 - Cloudinary
+        // Banner 2 - Cloudinary (b11)
         list.add(
             SliderModel(
-                url = "https://res.cloudinary.com/dxafieanc/image/upload/v1778446653/banner2_hrtxsq.png",
-                title = "New Arrivals",
-                subTitle = "Check out the latest collection",
-                buttonText = "Shop Now",
-                backgroundColor = "#1B2236",
+                url = "https://res.cloudinary.com/dxafieanc/image/upload/v1778949414/b11_ve5rlo.jpg",
+                title = "",
+                subTitle = "",
+                buttonText = "",
+                backgroundColor = "#00000000",
                 textColor = "#FFFFFF",
                 isImageLeft = false
             )

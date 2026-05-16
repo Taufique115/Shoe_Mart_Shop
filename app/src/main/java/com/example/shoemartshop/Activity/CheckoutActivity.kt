@@ -22,17 +22,11 @@ class CheckoutActivity : AppCompatActivity() {
         binding = ActivityCheckoutBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setupToolbar()
         setupRecyclerView()
         setupBottomSection()
         observeCart()
     }
 
-    private fun setupToolbar() {
-        binding.btnBack.setOnClickListener {
-            finish()
-        }
-    }
 
     private fun setupRecyclerView() {
         cartAdapter = CartAdapter(mutableListOf())

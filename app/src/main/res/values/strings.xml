@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Shoe Mart Shop</string>
     <string name="intro_title">Make Your Style \n Come \nTrue Here</string>
-    <string name="intro_title1">Step into \n<font color='#3a9aee'>Style</font> &amp; \nConfidence</string>
+    <string name="intro_title1">Step into \n<font color='#00AEEF'>Style</font> &amp; \nConfidence</string>
     <string name="go">GO</string>
     <string name="welcome_back">Welcome Back</string>
     <string name="search_hint">What are you looking for?</string>

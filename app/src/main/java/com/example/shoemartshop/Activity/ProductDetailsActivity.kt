@@ -160,29 +160,7 @@ class ProductDetailsActivity : AppCompatActivity() {
 
 
     private fun setupButtons() {
-        // Back button
-        binding.btnBack.setOnClickListener {
-            finish()
-        }
 
-        // Favorite button toggle
-        val currentTitle = intent.getStringExtra("title") ?: ""
-        // Use a temporary model for FavoriteManager checks
-        val tempItem = com.example.shoemartshop.Activity.Model.ItemModel(
-            title = currentTitle,
-            picUrl = intent.getStringExtra("imageUrl") ?: "",
-            price = basePrice,
-            rating = intent.getDoubleExtra("rating", 4.8)
-        )
-
-        isFavorite = com.example.shoemartshop.Activity.Repository.FavoriteManager.isFavorite(tempItem)
-        updateFavoriteButtonUI()
-
-        binding.btnFavorite.setOnClickListener {
-            com.example.shoemartshop.Activity.Repository.FavoriteManager.toggleFavorite(tempItem)
-            isFavorite = !isFavorite
-            updateFavoriteButtonUI()
-        }
 
         // Add to Cart button
         binding.btnAddToCart.setOnClickListener {
@@ -201,13 +179,6 @@ class ProductDetailsActivity : AppCompatActivity() {
         }
     }
 
-    private fun updateFavoriteButtonUI() {
-        if (isFavorite) {
-            binding.btnFavorite.setColorFilter(0xFF9E0404.toInt())
-        } else {
-            binding.btnFavorite.setColorFilter(0xFF919191.toInt())
-        }
-    }
 
     private fun createCartItem(): CartItemModel {
         val selectedUrl = if (::thumbnailAdapter.isInitialized) thumbnailAdapter.getSelectedUrls().firstOrNull() else null

@@ -8,36 +8,6 @@
     android:background="#FFFFFF"
     tools:context=".Activity.ProductDetailsActivity">
 
-    <!-- Top Bar: Back + Favorite -->
-    <ImageView
-        android:id="@+id/btnBack"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/back_button_bg"
-        android:contentDescription="Back"
-        android:elevation="2dp"
-        android:padding="10dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/back"
-        app:tint="#333333" />
-
-    <ImageView
-        android:id="@+id/btnFavorite"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        android:background="@drawable/back_button_bg"
-        android:contentDescription="Favorite"
-        android:elevation="2dp"
-        android:padding="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/fav_icon"
-        app:tint="#919191" />
 
     <!-- Scrollable Content -->
     <ScrollView
@@ -49,7 +19,7 @@
         app:layout_constraintBottom_toTopOf="@id/bottomBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnBack">
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -415,7 +385,7 @@
             app:tint="@color/blue" />
 
         <!-- Buy Now Button -->
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnBuyNow"
             android:layout_width="0dp"
             android:layout_height="50dp"
