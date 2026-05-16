@@ -115,6 +115,14 @@ class PaymentActivity : AppCompatActivity() {
             }
 
             Toast.makeText(this, "Payment Successful!", Toast.LENGTH_SHORT).show()
+            
+            // Record the order before clearing the cart
+            val subTotal = CartManager.getSubTotal()
+            val total = subTotal + (if (subTotal > 0) 45.0 else 0.0)
+            CartManager.cartItems.value?.let { items ->
+                com.example.shoemartshop.Activity.Repository.OrderManager.addOrder(items, total)
+            }
+            
             CartManager.clearCart()
             
             // Go back to Dashboard and clear backstack

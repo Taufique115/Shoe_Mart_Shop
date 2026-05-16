@@ -25,7 +25,7 @@ class SplashActivity : AppCompatActivity() {
         }
 
         binding.startBtn.setOnClickListener {
-            startActivity(Intent(this@SplashActivity, DashboardActivity::class.java))
+            startActivity(Intent(this@SplashActivity, LoginActivity::class.java))
         }
     }
 }

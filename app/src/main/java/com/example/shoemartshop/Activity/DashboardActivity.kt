@@ -71,6 +71,9 @@ class DashboardActivity : AppCompatActivity() {
         binding.favBtn.setOnClickListener {
             startActivity(Intent(this, FavoritesActivity::class.java))
         }
+        binding.profileBtn.setOnClickListener {
+            startActivity(Intent(this, ProfileActivity::class.java))
+        }
     }
 
     private fun observeCart() {
