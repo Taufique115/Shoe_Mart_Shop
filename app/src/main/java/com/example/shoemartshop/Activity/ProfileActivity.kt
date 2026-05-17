@@ -1,6 +1,9 @@
 package com.example.shoemartshop.Activity
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.View
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
@@ -10,6 +13,8 @@ import com.example.shoemartshop.Activity.Repository.OrderManager
 import com.example.shoemartshop.Activity.Repository.UserManager
 import com.example.shoemartshop.R
 import com.example.shoemartshop.databinding.ActivityProfileBinding
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import java.text.DecimalFormat
 
 class ProfileActivity : AppCompatActivity() {
@@ -25,20 +30,43 @@ class ProfileActivity : AppCompatActivity() {
         loadStatIcons()
         calculateStats()
         setupPurchasedList()
+
+        binding.btnSignOut.setOnClickListener {
+            com.example.shoemartshop.Activity.Repository.AuthService.logout()
+            val intent = Intent(this, LoginActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+            finish()
+        }
+
+        binding.cardAdminPanel.setOnClickListener {
+            val intent = Intent(this, AdminDashboardActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun loadUserDetails() {
-        val user = UserManager.getCurrentUser()
-        binding.txtName.text = user.name
-        binding.txtEmail.text = user.email
-        binding.txtPhone.text = user.phone
-        binding.txtLocation.text = user.location
+        // Use reactive LiveData observer to dynamically update the UI if the role toggles!
+        UserManager.currentUser.observe(this) { user ->
+            binding.txtName.text = user.name
+            binding.txtEmail.text = user.email
+            binding.txtPhone.text = user.phone
+            binding.txtLocation.text = user.location
+
+            if (user.role == "Admin") {
+                binding.cardAdminPanel.visibility = View.VISIBLE
+            } else {
+                binding.cardAdminPanel.visibility = View.GONE
+            }
+        }
 
         // Use the cartoon avatar
         binding.imgProfile.setImageResource(R.drawable.ic_male_avatar)
         binding.imgProfile.scaleType = android.widget.ImageView.ScaleType.FIT_CENTER
         binding.imgProfile.setBackgroundColor(0xFFF8F9FA.toInt())
     }
+
+
 
     private fun loadStatIcons() {
         val bkashUrl = "https://res.cloudinary.com/dxafieanc/image/upload/v1778877626/bkash_apxhc5.png"
@@ -51,7 +79,7 @@ class ProfileActivity : AppCompatActivity() {
     private fun calculateStats() {
         val totalSpent = OrderManager.getTotalSpent()
         val totalShoes = OrderManager.getTotalShoesPurchased()
-        
+
         val formatter = DecimalFormat("#,###.00")
         binding.txtTotalAmount.text = "BDT ${formatter.format(totalSpent)}"
         binding.txtTotalShoes.text = totalShoes.toString()
@@ -60,16 +88,16 @@ class ProfileActivity : AppCompatActivity() {
     private fun setupPurchasedList() {
         // Collect all items from all orders
         val allPurchasedItems = OrderManager.orders.value?.flatMap { it.items } ?: emptyList()
-        
+
         if (allPurchasedItems.isNotEmpty()) {
-            binding.txtPurchasesLabel.visibility = android.view.View.VISIBLE
-            binding.recyclerViewPurchased.visibility = android.view.View.VISIBLE
-            
+            binding.txtPurchasesLabel.visibility = View.VISIBLE
+            binding.recyclerViewPurchased.visibility = View.VISIBLE
+
             binding.recyclerViewPurchased.layoutManager = GridLayoutManager(this, 2)
             binding.recyclerViewPurchased.adapter = PurchasedShoesAdapter(allPurchasedItems)
         } else {
-            binding.txtPurchasesLabel.visibility = android.view.View.GONE
-            binding.recyclerViewPurchased.visibility = android.view.View.GONE
+            binding.txtPurchasesLabel.visibility = View.GONE
+            binding.recyclerViewPurchased.visibility = View.GONE
         }
     }
 }

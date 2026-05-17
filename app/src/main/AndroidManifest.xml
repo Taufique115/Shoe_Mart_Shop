@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
+        android:name=".Activity.ShoeMartApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -10,6 +13,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ShoeMartShop">
+
+        <activity
+            android:name=".Activity.CrashReportActivity"
+            android:exported="false"
+            android:process=":recovery" />
+
         <activity
             android:name=".Activity.SplashActivity"
             android:exported="true">
@@ -62,6 +71,23 @@
 
         <activity
             android:name=".Activity.ProfileActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".Activity.AdminDashboardActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".Activity.AdminUserActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".Activity.ProductEditActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".Activity.ReceiptActivity"
             android:exported="false" />
     </application>
 

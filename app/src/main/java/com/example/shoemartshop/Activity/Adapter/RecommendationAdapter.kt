@@ -50,6 +50,28 @@ class RecommendationAdapter(private var items: MutableList<ItemModel>) :
         holder.itemView.setOnClickListener {
             onItemClick?.invoke(item)
         }
+
+        // Handle Admin Edit Button
+        val context = holder.itemView.context
+        if (context is androidx.lifecycle.LifecycleOwner) {
+            com.example.shoemartshop.Activity.Repository.UserManager.currentUser.observe(context) { user ->
+                holder.binding.imgEdit.visibility = if (user.role == "Admin") android.view.View.VISIBLE else android.view.View.GONE
+            }
+        } else {
+            val currentUser = com.example.shoemartshop.Activity.Repository.UserManager.getCurrentUser()
+            holder.binding.imgEdit.visibility = if (currentUser.role == "Admin") android.view.View.VISIBLE else android.view.View.GONE
+        }
+
+        holder.binding.imgEdit.setOnClickListener {
+            val intent = android.content.Intent(context, com.example.shoemartshop.Activity.ProductEditActivity::class.java).apply {
+                putExtra("itemId", item.id)
+                putExtra("title", item.title)
+                putExtra("price", item.price)
+                putExtra("picUrl", item.picUrl)
+                putExtra("rating", item.rating)
+            }
+            context.startActivity(intent)
+        }
     }
 
     private fun updateFavoriteIcon(holder: ViewHolder, isFavorite: Boolean) {

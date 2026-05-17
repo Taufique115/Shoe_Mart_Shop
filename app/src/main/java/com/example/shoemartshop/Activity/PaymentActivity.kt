@@ -47,7 +47,7 @@ class PaymentActivity : AppCompatActivity() {
 
     private fun calculateTotal() {
         val subTotal = CartManager.getSubTotal()
-        val deliveryFee = if (subTotal > 0) 45.0 else 0.0
+        val deliveryFee = 0.0
         val total = subTotal + deliveryFee
 
         val formatter = DecimalFormat("#,###.00")
@@ -116,19 +116,25 @@ class PaymentActivity : AppCompatActivity() {
 
             Toast.makeText(this, "Payment Successful!", Toast.LENGTH_SHORT).show()
             
-            // Record the order before clearing the cart
+            // Record the order before clearing the cart (Delivery fee is removed!)
             val subTotal = CartManager.getSubTotal()
-            val total = subTotal + (if (subTotal > 0) 45.0 else 0.0)
+            val total = subTotal
             CartManager.cartItems.value?.let { items ->
                 com.example.shoemartshop.Activity.Repository.OrderManager.addOrder(items, total)
             }
             
-            CartManager.clearCart()
+            val paymentMethod = if (isBkashSelected) "bKash" else "Credit Card"
             
-            // Go back to Dashboard and clear backstack
-            val intent = Intent(this, DashboardActivity::class.java)
+            // Go to ReceiptActivity and clear backstack
+            val intent = Intent(this, ReceiptActivity::class.java).apply {
+                putExtra("subTotal", subTotal)
+                putExtra("paymentMethod", paymentMethod)
+            }
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(intent)
+            finish()
+            
+            CartManager.clearCart()
         }
     }
 
@@ -151,7 +157,7 @@ class PaymentActivity : AppCompatActivity() {
         
         // Reset Bottom button and footer
         val subTotal = CartManager.getSubTotal()
-        val deliveryFee = if (subTotal > 0) 45.0 else 0.0
+        val deliveryFee = 0.0
         val total = subTotal + deliveryFee
         val formatter = DecimalFormat("#,###.00")
         

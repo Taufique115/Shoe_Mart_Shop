@@ -44,6 +44,44 @@
                     android:padding="16dp"
                     android:scaleType="centerInside"
                     tools:src="@drawable/ic_launcher_foreground" />
+
+                <!-- Admin Contextual Controls Overlay -->
+                <LinearLayout
+                    android:id="@+id/layoutAdminProductControls"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top|end"
+                    android:layout_margin="12dp"
+                    android:orientation="horizontal"
+                    android:background="@drawable/circle_white_bg"
+                    android:backgroundTint="#FFFFFF"
+                    android:elevation="4dp"
+                    android:padding="4dp"
+                    android:visibility="gone">
+
+                    <ImageView
+                        android:id="@+id/btnEditProduct"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:src="@android:drawable/ic_menu_edit"
+                        app:tint="#FF1744"
+                        android:padding="6dp"
+                        android:background="?android:attr/selectableItemBackgroundBorderless"
+                        android:clickable="true"
+                        android:focusable="true"/>
+
+                    <ImageView
+                        android:id="@+id/btnDeleteProduct"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:layout_marginStart="8dp"
+                        android:src="@android:drawable/ic_menu_delete"
+                        app:tint="#FF3B30"
+                        android:padding="6dp"
+                        android:background="?android:attr/selectableItemBackgroundBorderless"
+                        android:clickable="true"
+                        android:focusable="true"/>
+                </LinearLayout>
             </FrameLayout>
 
             <!-- Variant Section Label -->

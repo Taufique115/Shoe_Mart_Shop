@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#121212"
+    android:padding="24dp">
+
+    <TextView
+        android:id="@+id/txtCrashTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SHOEMART RECOVERY"
+        android:textColor="#FF1744"
+        android:textSize="22sp"
+        android:fontFamily="sans-serif-black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txtCrashSubTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="The application encountered an unexpected runtime error. Please take a screenshot or copy the technical details below so we can fix it for you:"
+        android:textColor="#CCCCCC"
+        android:textSize="12sp"
+        app:layout_constraintTop_toBottomOf="@id/txtCrashTitle" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardStackTrace"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        app:cardCornerRadius="8dp"
+        app:cardBackgroundColor="#1E1E1E"
+        app:layout_constraintBottom_toTopOf="@id/btnCopyTrace"
+        app:layout_constraintTop_toBottomOf="@id/txtCrashSubTitle">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="12dp">
+
+            <TextView
+                android:id="@+id/txtStackTrace"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#FF8A80"
+                android:textSize="11sp"
+                android:fontFamily="monospace"
+                android:textIsSelectable="true" />
+        </ScrollView>
+    </androidx.cardview.widget.CardView>
+
+    <android.widget.Button
+        android:id="@+id/btnCopyTrace"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:text="Copy Technical Details"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#2C2C2C"
+        android:textAllCaps="false"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/btnRestartApp"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <android.widget.Button
+        android:id="@+id/btnRestartApp"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:text="Restart App"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#FF1744"
+        android:textAllCaps="false"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/btnCopyTrace" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

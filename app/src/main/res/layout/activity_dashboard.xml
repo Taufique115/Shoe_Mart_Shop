@@ -320,4 +320,19 @@
         </LinearLayout>
     </LinearLayout>
 
+    <!-- Admin Floating Action Button to Add Product -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabAddProduct"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="24dp"
+        android:src="@android:drawable/ic_input_add"
+        app:tint="#FFFFFF"
+        app:backgroundTint="#FF1744"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@id/linearLayout2"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:contentDescription="Add Product" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

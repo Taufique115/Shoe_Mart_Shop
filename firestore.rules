@@ -1,0 +1,28 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+  
+    // Helper function: checks if the authenticated user has the Admin role in their user document
+    function isAdmin() {
+      return request.auth != null && 
+        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'Admin';
+    }
+
+    // Secure user profiles: a user can read/write their own, Admins can read/write all
+    match /users/{userId} {
+      allow read, write: if (request.auth != null && request.auth.uid == userId) || isAdmin();
+    }
+    
+    // Secure orders collection
+    match /orders/{orderId} {
+      allow create: if request.auth != null && (request.resource.data.userId == request.auth.uid || isAdmin());
+      allow read: if request.auth != null && (resource.data.userId == request.auth.uid || isAdmin());
+      allow update, delete: if isAdmin();
+    }
+    
+    // Default fallback
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
@@ -17,6 +18,7 @@ import com.example.shoemartshop.Activity.Adapter.RecommendationAdapter
 import com.example.shoemartshop.Activity.Adapter.SliderAdapter
 import com.example.shoemartshop.Activity.Model.ItemModel
 import com.example.shoemartshop.Activity.ViewModel.MainViewModel
+import com.example.shoemartshop.Activity.Repository.UserManager
 import com.example.shoemartshop.databinding.ActivityDashboardBinding
 
 class DashboardActivity : AppCompatActivity() {
@@ -42,6 +44,22 @@ class DashboardActivity : AppCompatActivity() {
         observeCart()
         observeFavorites()
         setupBottomNav()
+        setupAdminFab()
+    }
+
+    private fun setupAdminFab() {
+        UserManager.currentUser.observe(this) { user ->
+            if (user.role == "Admin") {
+                binding.fabAddProduct.visibility = View.VISIBLE
+            } else {
+                binding.fabAddProduct.visibility = View.GONE
+            }
+        }
+
+        binding.fabAddProduct.setOnClickListener {
+            val intent = Intent(this, ProductEditActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun initSearch() {
@@ -65,6 +83,20 @@ class DashboardActivity : AppCompatActivity() {
     }
 
     private fun setupBottomNav() {
+        binding.homeBtn.setOnClickListener {
+            Toast.makeText(this, "Refreshing shop content...", Toast.LENGTH_SHORT).show()
+            
+            // Show loading indicators
+            binding.progressBarBanner.visibility = View.VISIBLE
+            binding.progressBarCategory.visibility = View.VISIBLE
+            binding.progressBarRecommendation.visibility = View.VISIBLE
+            
+            // Reload all dashboard content dynamically
+            viewModel.loadBanners()
+            viewModel.loadBrands()
+            viewModel.loadRecommended()
+        }
+
         binding.cartBtn.setOnClickListener {
             startActivity(Intent(this, CheckoutActivity::class.java))
         }
@@ -195,7 +227,7 @@ class DashboardActivity : AppCompatActivity() {
                     "https://res.cloudinary.com/dxafieanc/image/upload/v1778446625/0_2_gm5lpi.png",
                     "https://res.cloudinary.com/dxafieanc/image/upload/v1778446625/0_3_h2wca9.png"
                 )
-            } else {
+            } else if (item.id.startsWith("item_")) {
                 arrayListOf(
                     "https://res.cloudinary.com/dxafieanc/image/upload/v1778873999/ChatGPT_Image_May_16_2026_01_38_52_AM_1_ie2bvf.png",
                     "https://res.cloudinary.com/dxafieanc/image/upload/v1778873998/ChatGPT_Image_May_16_2026_01_38_53_AM_4_pwluz1.png",
@@ -203,6 +235,8 @@ class DashboardActivity : AppCompatActivity() {
                     "https://res.cloudinary.com/dxafieanc/image/upload/v1778873998/ChatGPT_Image_May_16_2026_01_38_53_AM_3_df7ozb.png",
                     "https://res.cloudinary.com/dxafieanc/image/upload/v1778873998/ChatGPT_Image_May_16_2026_01_38_54_AM_5_bwh9n8.png"
                 )
+            } else {
+                arrayListOf(item.picUrl)
             }
             
             val itemDescription = if (isNike) {
@@ -214,6 +248,7 @@ class DashboardActivity : AppCompatActivity() {
             }
             
             val intent = Intent(this, ProductDetailsActivity::class.java).apply {
+                putExtra("itemId", item.id)
                 putExtra("title", item.title)
                 putExtra("imageUrl", item.picUrl)
                 putExtra("price", item.price)

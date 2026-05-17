@@ -18,6 +18,21 @@
         app:layout_constraintTop_toTopOf="parent"
         app:tint="@color/grey" />
 
+    <!-- Edit Icon for Admin -->
+    <ImageView
+        android:id="@+id/imgEdit"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@android:drawable/ic_menu_edit"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="#FF1744"
+        android:background="?android:attr/selectableItemBackgroundBorderless"
+        android:clickable="true"
+        android:focusable="true"
+        android:contentDescription="Edit Product" />
+
     <!-- Product Image -->
     <ImageView
         android:id="@+id/imgProduct"

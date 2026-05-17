@@ -24,8 +24,16 @@ class SplashActivity : AppCompatActivity() {
             insets
         }
 
+        // Automatic persistent login check
+        if (com.example.shoemartshop.Activity.Repository.AuthService.isUserLoggedIn()) {
+            startActivity(Intent(this, DashboardActivity::class.java))
+            finish()
+            return
+        }
+
         binding.startBtn.setOnClickListener {
             startActivity(Intent(this@SplashActivity, LoginActivity::class.java))
+            finish()
         }
     }
 }

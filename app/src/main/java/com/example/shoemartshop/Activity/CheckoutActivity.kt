@@ -67,12 +67,12 @@ class CheckoutActivity : AppCompatActivity() {
 
     private fun updateTotals() {
         val subTotal = CartManager.getSubTotal()
-        val deliveryFee = if (subTotal > 0) 45.0 else 0.0
+        val deliveryFee = 0.0
         val total = subTotal + deliveryFee
 
         val formatter = DecimalFormat("#,###.00")
         binding.txtSubTotal.text = "৳${formatter.format(subTotal)}"
-        binding.txtDeliveryFee.text = "৳${formatter.format(deliveryFee)}"
+        binding.txtDeliveryFee.text = "Free"
         binding.txtTotal.text = "৳${formatter.format(total)}"
     }
 }

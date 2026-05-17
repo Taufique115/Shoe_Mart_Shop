@@ -37,6 +37,7 @@ class ProductDetailsActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         // Read intent extras
+        val itemId = intent.getStringExtra("itemId") ?: ""
         val title = intent.getStringExtra("title") ?: "Adidas Ultraboost Runner"
         val imageUrl = intent.getStringExtra("imageUrl") ?: ""
         val price = intent.getDoubleExtra("price", 22000.0)
@@ -53,6 +54,56 @@ class ProductDetailsActivity : AppCompatActivity() {
         setupSizeChips()
         setupQuantityStepper()
         setupButtons()
+        setupAdminControls(itemId, title, imageUrl, price, rating, description)
+    }
+
+    private fun setupAdminControls(
+        itemId: String,
+        title: String,
+        imageUrl: String,
+        price: Double,
+        rating: Double,
+        description: String
+    ) {
+        // Observe user session reactive role to show the edit/delete overlay!
+        com.example.shoemartshop.Activity.Repository.UserManager.currentUser.observe(this) { user ->
+            if (user.role == "Admin" && itemId.isNotEmpty()) {
+                binding.layoutAdminProductControls.visibility = android.view.View.VISIBLE
+            } else {
+                binding.layoutAdminProductControls.visibility = android.view.View.GONE
+            }
+        }
+
+        binding.btnEditProduct.setOnClickListener {
+            val editIntent = android.content.Intent(this, ProductEditActivity::class.java).apply {
+                putExtra("itemId", itemId)
+                putExtra("title", title)
+                putExtra("price", price)
+                putExtra("picUrl", imageUrl)
+                putExtra("rating", rating)
+            }
+            startActivity(editIntent)
+            finish() // Close details so it gets reloaded cleanly when saved
+        }
+
+        binding.btnDeleteProduct.setOnClickListener {
+            android.app.AlertDialog.Builder(this)
+                .setTitle("Remove Product?")
+                .setMessage("Are you absolutely sure you want to delete this product from the store catalog permanently?")
+                .setPositiveButton("Remove") { _, _ ->
+                    com.google.firebase.database.FirebaseDatabase.getInstance()
+                        .getReference("Items").child(itemId).removeValue()
+                        .addOnSuccessListener {
+                            Toast.makeText(this, "Product successfully deleted", Toast.LENGTH_SHORT).show()
+                            finish()
+                        }
+                        .addOnFailureListener { e ->
+                            Toast.makeText(this, "Failed to remove product: ${e.message}", Toast.LENGTH_SHORT).show()
+                        }
+                }
+                .setNegativeButton("Cancel", null)
+                .show()
+        }
     }
 
     private fun setupUI(
@@ -82,8 +133,10 @@ class ProductDetailsActivity : AppCompatActivity() {
     }
 
     private fun setupThumbnailCarousel(mainImageUrl: String, variantUrls: List<String>) {
-        // Prepend the main product image as the first thumbnail
-        val allThumbnails = mutableListOf(mainImageUrl).apply { addAll(variantUrls) }
+        // Prepend the main product image as the first thumbnail, filtering out duplicates
+        val allThumbnails = mutableListOf(mainImageUrl).apply { 
+            addAll(variantUrls.filter { it != mainImageUrl }) 
+        }
 
         thumbnailAdapter = ThumbnailAdapter(allThumbnails) { selectedUrl, _ ->
             Glide.with(this)

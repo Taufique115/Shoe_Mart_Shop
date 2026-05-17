@@ -164,10 +164,15 @@
                         android:textSize="16sp" />
 
                     <ImageView
+                        android:id="@+id/btnTogglePassword"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         app:srcCompat="@android:drawable/ic_menu_view"
-                        app:tint="#888888" />
+                        app:tint="#888888"
+                        android:background="?android:attr/selectableItemBackgroundBorderless"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:contentDescription="Toggle Password Visibility" />
                 </LinearLayout>
 
                 <TextView
@@ -227,5 +232,17 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:elevation="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:indeterminateTint="#FF7A00" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

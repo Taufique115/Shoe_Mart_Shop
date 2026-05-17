@@ -241,10 +241,15 @@
                         android:textSize="15sp" />
 
                     <ImageView
+                        android:id="@+id/btnTogglePassword"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         app:srcCompat="@android:drawable/ic_menu_view"
-                        app:tint="#888888" />
+                        app:tint="#888888"
+                        android:background="?android:attr/selectableItemBackgroundBorderless"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:contentDescription="Toggle Password Visibility" />
                 </LinearLayout>
 
                 <!-- Confirm Password Input -->
@@ -276,10 +281,15 @@
                         android:textSize="15sp" />
 
                     <ImageView
+                        android:id="@+id/btnToggleConfirmPassword"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         app:srcCompat="@android:drawable/ic_menu_view"
-                        app:tint="#888888" />
+                        app:tint="#888888"
+                        android:background="?android:attr/selectableItemBackgroundBorderless"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:contentDescription="Toggle Confirm Password Visibility" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -296,6 +306,57 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/inputSection" />
 
+            <CheckBox
+                android:id="@+id/checkAdmin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="24dp"
+                android:layout_marginTop="8dp"
+                android:text="Register as Admin"
+                android:textColor="#000000"
+                android:textSize="12sp"
+                android:buttonTint="#FF7A00"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/checkTerms" />
+
+            <LinearLayout
+                android:id="@+id/layoutAdminCode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone"
+                android:layout_marginHorizontal="24dp"
+                android:layout_marginTop="12dp"
+                app:layout_constraintTop_toBottomOf="@id/checkAdmin"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:background="@drawable/login_input_bg"
+                    android:gravity="center_vertical"
+                    android:paddingHorizontal="16dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        app:srcCompat="@android:drawable/ic_lock_lock"
+                        app:tint="#FF7A00" />
+
+                    <EditText
+                        android:id="@+id/etAdminCode"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:textColor="#000000"
+                        android:textColorHint="#888888"
+                        android:hint="Admin Secret Passcode"
+                        android:inputType="textPassword"
+                        android:textSize="15sp" />
+                </LinearLayout>
+            </LinearLayout>
+
             <!-- Create Account Button -->
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnCreateAccount"
@@ -309,7 +370,7 @@
                 android:textColor="#FFFFFF"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                app:layout_constraintTop_toBottomOf="@id/checkTerms" />
+                app:layout_constraintTop_toBottomOf="@id/layoutAdminCode" />
 
             <!-- Bottom Footer -->
             <LinearLayout
@@ -339,5 +400,17 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:elevation="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:indeterminateTint="#FF7A00" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

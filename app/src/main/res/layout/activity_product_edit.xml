@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF">
+
+    <!-- Sticky Header -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/headerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF"
+        android:padding="20dp"
+        android:elevation="4dp"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/btnBack"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@android:drawable/ic_menu_revert"
+            app:tint="#FF1744"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true"/>
+
+        <TextView
+            android:id="@+id/txtHeaderTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="EDIT CATALOG ITEM"
+            android:textColor="#1E1E1E"
+            android:textSize="18sp"
+            android:fontFamily="sans-serif-black"
+            android:layout_marginStart="16dp"
+            app:layout_constraintStart_toEndOf="@id/btnBack"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintTop_toBottomOf="@id/headerLayout"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="24dp">
+
+            <!-- Dynamic Image Preview Container -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="160dp"
+                android:layout_height="160dp"
+                android:layout_gravity="center_horizontal"
+                app:cardCornerRadius="24dp"
+                app:cardElevation="2dp"
+                app:cardBackgroundColor="#F8F9FA">
+
+                <ImageView
+                    android:id="@+id/imgProductPreview"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="16dp"
+                    android:scaleType="fitCenter"
+                    android:src="@android:drawable/ic_menu_gallery"
+                    app:tint="#888888"/>
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="8dp"
+                android:text="Live Graphic Preview"
+                android:textColor="#AAAAAA"
+                android:textSize="10sp"
+                android:fontFamily="sans-serif-black"/>
+
+            <!-- Form Inputs -->
+            <!-- Title -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="Product Title / Name"
+                android:textColor="#1E1E1E"
+                android:textSize="12sp"
+                android:fontFamily="sans-serif-black"/>
+
+            <EditText
+                android:id="@+id/etProductTitle"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/login_input_bg"
+                android:hint="e.g. Nike Jordan Air Flight"
+                android:textColorHint="#CCCCCC"
+                android:textColor="#1E1E1E"
+                android:paddingHorizontal="16dp"
+                android:textSize="14sp"
+                android:singleLine="true"
+                android:inputType="textCapWords"/>
+
+            <!-- Price -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Price (BDT)"
+                android:textColor="#1E1E1E"
+                android:textSize="12sp"
+                android:fontFamily="sans-serif-black"/>
+
+            <EditText
+                android:id="@+id/etProductPrice"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/login_input_bg"
+                android:hint="e.g. 18500"
+                android:textColorHint="#CCCCCC"
+                android:textColor="#1E1E1E"
+                android:paddingHorizontal="16dp"
+                android:textSize="14sp"
+                android:singleLine="true"
+                android:inputType="numberDecimal"/>
+
+            <!-- Image URL -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Cloudinary / Image URL"
+                android:textColor="#1E1E1E"
+                android:textSize="12sp"
+                android:fontFamily="sans-serif-black"/>
+
+            <EditText
+                android:id="@+id/etProductPicUrl"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/login_input_bg"
+                android:hint="Paste premium shoe image URL here..."
+                android:textColorHint="#CCCCCC"
+                android:textColor="#1E1E1E"
+                android:paddingHorizontal="16dp"
+                android:textSize="12sp"
+                android:singleLine="true"
+                android:inputType="textUri"/>
+
+            <!-- Rating -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Product Rating"
+                android:textColor="#1E1E1E"
+                android:textSize="12sp"
+                android:fontFamily="sans-serif-black"/>
+
+            <EditText
+                android:id="@+id/etProductRating"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/login_input_bg"
+                android:hint="e.g. 4.7 (between 1.0 and 5.0)"
+                android:textColorHint="#CCCCCC"
+                android:textColor="#1E1E1E"
+                android:paddingHorizontal="16dp"
+                android:textSize="14sp"
+                android:singleLine="true"
+                android:inputType="numberDecimal"/>
+
+            <!-- Actions Row -->
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnSaveProduct"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginTop="32dp"
+                android:background="@drawable/orange_rounded_button"
+                android:text="Save Product Changes"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:fontFamily="sans-serif-black"
+                android:textAllCaps="false"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnDeleteProduct"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/white_button_bg"
+                android:text="Remove Shoe from Store"
+                android:textColor="#FF1744"
+                android:textSize="14sp"
+                android:fontFamily="sans-serif-black"
+                android:textAllCaps="false"
+                android:visibility="gone"/>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
