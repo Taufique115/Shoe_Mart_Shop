@@ -113,8 +113,6 @@ class PaymentActivity : AppCompatActivity() {
             } else {
                 binding.txtErrorSubtitle.visibility = View.GONE
             }
-
-            Toast.makeText(this, "Payment Successful!", Toast.LENGTH_SHORT).show()
             
             // Record the order before clearing the cart (Delivery fee is removed!)
             val subTotal = CartManager.getSubTotal()

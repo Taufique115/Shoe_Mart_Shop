@@ -28,8 +28,12 @@ class ProfileActivity : AppCompatActivity() {
 
         loadUserDetails()
         loadStatIcons()
-        calculateStats()
-        setupPurchasedList()
+
+        // Observe orders dynamically to calculate stats and set up the list reactively
+        OrderManager.orders.observe(this) { orders ->
+            calculateStats()
+            setupPurchasedList()
+        }
 
         binding.btnSignOut.setOnClickListener {
             com.example.shoemartshop.Activity.Repository.AuthService.logout()

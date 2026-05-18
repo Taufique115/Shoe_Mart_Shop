@@ -6,6 +6,8 @@ import android.util.Patterns
 import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import com.bumptech.glide.Glide
 import com.example.shoemartshop.Activity.Repository.AuthService
 import com.example.shoemartshop.databinding.ActivityLoginBinding
@@ -19,6 +21,19 @@ class LoginActivity : AppCompatActivity() {
         enableEdgeToEdge()
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        ViewCompat.setOnApplyWindowInsetsListener(binding.root) { _, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            val ime = insets.getInsets(WindowInsetsCompat.Type.ime())
+            val bottomPadding = if (ime.bottom > 0) ime.bottom else systemBars.bottom
+            binding.scrollView.setPadding(
+                systemBars.left,
+                systemBars.top,
+                systemBars.right,
+                bottomPadding
+            )
+            insets
+        }
 
         // Load background shoe image from Cloudinary
         Glide.with(this)

@@ -28,7 +28,12 @@ class CartAdapter(private var items: MutableList<CartItemModel>) :
         val item = items[position]
 
         holder.binding.txtTitle.text = item.title
-        holder.binding.txtBrand.text = item.brand
+        val brandText = if (item.selectedSize.isNotEmpty()) {
+            "${item.brand} | Size: ${item.selectedSize}"
+        } else {
+            item.brand
+        }
+        holder.binding.txtBrand.text = brandText
         
         val formatter = DecimalFormat("#,###.00")
         holder.binding.txtPrice.text = "৳${formatter.format(item.price)}"

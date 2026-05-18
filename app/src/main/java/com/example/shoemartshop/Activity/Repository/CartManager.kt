@@ -11,13 +11,25 @@ object CartManager {
     fun addItem(item: CartItemModel) {
         val currentList = _cartItems.value ?: mutableListOf()
         
-        // Check if item already exists (same title and color)
-        val existingItem = currentList.find { it.title == item.title && it.selectedColorUrl == item.selectedColorUrl }
+        // Check if item already exists (same unique variant combination)
+        val existingItem = currentList.find { it.id == item.id }
         if (existingItem != null) {
             existingItem.quantity += item.quantity
         } else {
             currentList.add(item)
         }
+        
+        _cartItems.value = currentList
+    }
+
+    fun syncProductVariants(productTitle: String, updatedVariants: List<CartItemModel>) {
+        val currentList = _cartItems.value ?: mutableListOf()
+        
+        // Remove all existing selections for this product title
+        currentList.removeAll { it.title == productTitle }
+        
+        // Insert the fresh, newly updated configurations
+        currentList.addAll(updatedVariants)
         
         _cartItems.value = currentList
     }

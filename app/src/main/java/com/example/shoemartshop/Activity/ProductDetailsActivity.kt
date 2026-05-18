@@ -23,6 +23,7 @@ class ProductDetailsActivity : AppCompatActivity() {
     private var quantity = 1
     private var basePrice = 0.0
     private val formatter = DecimalFormat("#,###")
+    private var allThumbnailsList = listOf<String>()
 
     // Size chips list for easy management
     private lateinit var sizeChips: List<TextView>
@@ -137,6 +138,7 @@ class ProductDetailsActivity : AppCompatActivity() {
         val allThumbnails = mutableListOf(mainImageUrl).apply { 
             addAll(variantUrls.filter { it != mainImageUrl }) 
         }
+        allThumbnailsList = allThumbnails
 
         thumbnailAdapter = ThumbnailAdapter(allThumbnails) { selectedUrl, _ ->
             Glide.with(this)
@@ -213,38 +215,60 @@ class ProductDetailsActivity : AppCompatActivity() {
 
 
     private fun setupButtons() {
-
-
         // Add to Cart button
         binding.btnAddToCart.setOnClickListener {
-            val item = createCartItem()
-            CartManager.addItem(item)
+            val items = getSelectedCartItems()
+            items.forEach { item ->
+                CartManager.addItem(item)
+            }
             Toast.makeText(this, "Added to cart!", Toast.LENGTH_SHORT).show()
         }
 
         // Buy Now button
         binding.btnBuyNow.setOnClickListener {
-            val item = createCartItem()
-            CartManager.addItem(item)
+            val items = getSelectedCartItems()
+            val title = intent.getStringExtra("title") ?: "Unknown Product"
+            
+            // Sync current variant selections to checkout cleanly
+            CartManager.syncProductVariants(title, items)
             
             val checkoutIntent = android.content.Intent(this, CheckoutActivity::class.java)
             startActivity(checkoutIntent)
         }
     }
 
+    private fun getSelectedCartItems(): List<CartItemModel> {
+        val selectedUrls = if (::thumbnailAdapter.isInitialized) {
+            thumbnailAdapter.getSelectedUrls()
+        } else {
+            listOf(intent.getStringExtra("imageUrl") ?: "")
+        }
 
-    private fun createCartItem(): CartItemModel {
-        val selectedUrl = if (::thumbnailAdapter.isInitialized) thumbnailAdapter.getSelectedUrls().firstOrNull() else null
+        // Get the selected size text from the chips
+        val selectedSizeText = sizeChips.getOrNull(selectedSizeIndex)?.text?.toString() ?: "40"
         val title = intent.getStringExtra("title") ?: "Unknown Product"
         val imageUrl = intent.getStringExtra("imageUrl") ?: ""
-        
-        return CartItemModel(
-            title = title,
-            brand = "Whatman shoes", // Default
-            price = basePrice,
-            picUrl = imageUrl,
-            quantity = quantity,
-            selectedColorUrl = selectedUrl
-        )
+        val brand = intent.getStringExtra("brand") ?: "Whatman shoes"
+
+        return selectedUrls.map { colorUrl ->
+            val index = allThumbnailsList.indexOf(colorUrl)
+            val colorName = if (index != -1) {
+                if (index == 0) "Main Color" else "Variant Color #${index + 1}"
+            } else {
+                "Default Color"
+            }
+
+            CartItemModel(
+                id = "${title}_${selectedSizeText}_${colorUrl}",
+                title = title,
+                brand = brand,
+                price = basePrice,
+                picUrl = imageUrl,
+                quantity = quantity,
+                selectedColorUrl = colorUrl,
+                selectedSize = selectedSizeText,
+                selectedColor = colorName
+            )
+        }
     }
 }
